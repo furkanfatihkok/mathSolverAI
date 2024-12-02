@@ -97,7 +97,7 @@ final class EmptyVC: UIViewController {
         
         startLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(237)
+            make.top.equalTo(titleLabel.snp.bottom).offset(160)
         }
         
         descriptionLabel.snp.makeConstraints { make in
@@ -114,8 +114,8 @@ final class EmptyVC: UIViewController {
         }
         
         circleButton.snp.makeConstraints { make in
-            make.top.equalTo(arrowImageView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
             make.width.height.equalTo(100)
         }
     }

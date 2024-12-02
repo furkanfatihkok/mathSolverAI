@@ -88,13 +88,13 @@ final class PaywallVC: UIViewController {
         view.addSubview(startButton)
 
         closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.trailing.equalToSuperview().offset(-20)
             make.width.height.equalTo(30)
         }
 
         crownImageView.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).offset(20)
+            make.top.equalTo(closeButton.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.width.equalTo(Constants.Layout.imageWidth * 0.8)
             make.height.equalTo(Constants.Layout.imageHeight * 0.8)
@@ -126,6 +126,7 @@ final class PaywallVC: UIViewController {
             make.top.equalTo(annualOptionView.snp.bottom).offset(45)
             make.left.right.equalToSuperview().inset(20)
             make.height.equalTo(Constants.Layout.buttonHeightFixed)
+            make.width.equalTo(Constants.Layout.buttonWidthFixed)
         }
     }
 

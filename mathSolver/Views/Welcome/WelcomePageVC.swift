@@ -53,7 +53,12 @@ final class WelcomePageVC: UIViewController {
         setupViews()
         startAnimation()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(animatedButton)
@@ -79,7 +84,7 @@ final class WelcomePageVC: UIViewController {
         }
 
         continueButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
             make.centerX.equalToSuperview()
             make.height.equalTo(Constants.Layout.buttonHeightFixed)
             make.width.equalTo(Constants.Layout.buttonWidthFixed)

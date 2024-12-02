@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let welcomePageVC = OnboardingVC()
+        let welcomePageVC = WelcomePageVC()
         let navigationController = UINavigationController(rootViewController: welcomePageVC)
         
         window.rootViewController = navigationController
