@@ -23,7 +23,6 @@
 		02D5B9842CEE025900FECD96 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9832CEE025900FECD96 /* OnboardingVC.swift */; };
 		02D5B9862CEE026200FECD96 /* EmptyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9852CEE026200FECD96 /* EmptyVC.swift */; };
 		02D5B9882CEE026D00FECD96 /* PaywallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9872CEE026D00FECD96 /* PaywallVC.swift */; };
-		02D5B9962CEE09C000FECD96 /* NeonSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 02D5B9952CEE09C000FECD96 /* NeonSDK */; };
 		02D5B9AD2CEE1A9000FECD96 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D5B99A2CEE1A9000FECD96 /* Poppins-Bold.ttf */; };
 		02D5B9B82CEE1A9000FECD96 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D5B9A52CEE1A9000FECD96 /* Poppins-Regular.ttf */; };
 		02D5B9C12CEE1E6F00FECD96 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9C02CEE1E6F00FECD96 /* UIButton.swift */; };
@@ -36,6 +35,7 @@
 		02D5B9DD2CF7358900FECD96 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9DC2CF7358900FECD96 /* SettingsCell.swift */; };
 		02D5B9E12CF858C000FECD96 /* SubscriptionOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9E02CF858C000FECD96 /* SubscriptionOptionView.swift */; };
 		02F1411A2CFEE68000337281 /* SolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F141192CFEE68000337281 /* SolutionModel.swift */; };
+		02F1411C2CFEF1FD00337281 /* NeonSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 02F1411B2CFEF1FD00337281 /* NeonSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02D5B9962CEE09C000FECD96 /* NeonSDK in Frameworks */,
+				02F1411C2CFEF1FD00337281 /* NeonSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +312,7 @@
 			);
 			name = mathSolver;
 			packageProductDependencies = (
-				02D5B9952CEE09C000FECD96 /* NeonSDK */,
+				02F1411B2CFEF1FD00337281 /* NeonSDK */,
 			);
 			productName = mathSolver;
 			productReference = 027BA4D02CEDFBA500DABD30 /* mathSolver.app */;
@@ -624,7 +624,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		02D5B9952CEE09C000FECD96 /* NeonSDK */ = {
+		02F1411B2CFEF1FD00337281 /* NeonSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 02D5B9802CEE00BE00FECD96 /* XCRemoteSwiftPackageReference "neon-sdk" */;
 			productName = NeonSDK;
