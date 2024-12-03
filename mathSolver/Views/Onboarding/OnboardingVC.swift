@@ -98,6 +98,9 @@ final class OnboardingVC: UIViewController {
 
     // MARK: - Action Methods
     @objc private func continueButtonTapped() {
+        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
+        UserDefaults.standard.synchronize()
+        
         if currentPage < onboardingData.count - 1 {
             currentPage += 1
             let targetOffsetX = CGFloat(currentPage) * collectionView.frame.width

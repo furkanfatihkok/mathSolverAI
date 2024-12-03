@@ -110,6 +110,9 @@ final class WelcomePageVC: UIViewController {
 
     // MARK: - Actions
     @objc private func continueButtonTapped() {
+        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
+        UserDefaults.standard.synchronize()
+        
         let onboardingVC = OnboardingVC()
         navigationController?.pushViewController(onboardingVC, animated: true)
     }
