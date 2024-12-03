@@ -77,6 +77,7 @@ final class PaywallVC: UIViewController {
         configureStartButtonAction()
     }
 
+    // MARK: - Setup Methods
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(closeButton)
@@ -134,7 +135,7 @@ final class PaywallVC: UIViewController {
         return Constants.Paywall.bulletPoints.map { text in
             let label = UILabel()
             label.text = "◉ \(text)"
-            label.font = Constants.Fonts.poppinsRegular(size: Constants.Layout.descriptionFontSize * 0.8 )
+            label.font = Constants.Fonts.poppinsRegular(size: Constants.Layout.descriptionFontSize * 0.8)
             label.textColor = .black
             label.textAlignment = .center
             return label
@@ -147,8 +148,8 @@ final class PaywallVC: UIViewController {
 
     // MARK: - Actions
     @objc private func closeTapped() {
-        let homeVC = EmptyVC()
-        let navigationController = UINavigationController(rootViewController: homeVC)
+        let emptyVC = EmptyVC()
+        let navigationController = UINavigationController(rootViewController: emptyVC)
         navigationController.modalPresentationStyle = .fullScreen
 
         if let window = UIApplication.shared.windows.first {

@@ -9,7 +9,8 @@ import SnapKit
 
 final class StepsCell: UICollectionViewCell {
     static let identifier = Constants.Cells.StepsCell.identifier
-    
+
+    // MARK: - UI Components
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -36,7 +37,8 @@ final class StepsCell: UICollectionViewCell {
         stackView.distribution = .fill
         return stackView
     }()
-    
+
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -45,7 +47,8 @@ final class StepsCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Setup Methods
     private func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(titleLabel)
@@ -67,9 +70,11 @@ final class StepsCell: UICollectionViewCell {
             make.left.right.bottom.equalToSuperview().inset(16)
         }
     }
-    
+
+    // MARK: - Configure Cell
     func configure(steps: [String]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
         steps.forEach { step in
             let stepLabel = UILabel()
             stepLabel.text = step

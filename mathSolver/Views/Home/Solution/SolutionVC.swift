@@ -53,8 +53,6 @@ final class SolutionVC: UIViewController {
         )
     }()
     
-    //TODO: Oluşturulan BaseVC ile beraberinde buraya ekle onu.
-    
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.hidesWhenStopped = true

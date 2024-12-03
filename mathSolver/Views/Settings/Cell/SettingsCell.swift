@@ -10,6 +10,7 @@ import NeonSDK
 
 final class SettingsCell: NeonTableViewCell<SettingsOption> {
 
+    // MARK: - UI Components
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -35,8 +36,8 @@ final class SettingsCell: NeonTableViewCell<SettingsOption> {
         setupViews()
     }
 
-    // MARK: - Setup Views
-    func setupViews() {
+    // MARK: - Setup Methods
+    private func setupViews() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
 
