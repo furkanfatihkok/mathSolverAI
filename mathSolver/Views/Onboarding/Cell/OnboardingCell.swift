@@ -10,7 +10,8 @@ import NeonSDK
 
 final class OnboardingCell: NeonCollectionViewCell<OnboardingContent> {
     static let identifier = Constants.Cells.OnboardingCell.identifier
-    
+
+    // MARK: - UI Components
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -33,7 +34,8 @@ final class OnboardingCell: NeonCollectionViewCell<OnboardingContent> {
         label.numberOfLines = 0
         return label
     }()
-    
+
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -42,7 +44,8 @@ final class OnboardingCell: NeonCollectionViewCell<OnboardingContent> {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Setup Methods
     private func setupViews() {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
@@ -65,7 +68,8 @@ final class OnboardingCell: NeonCollectionViewCell<OnboardingContent> {
             make.left.right.equalToSuperview().inset(20)
         }
     }
-    
+
+    // MARK: - Configuration
     override func configure(with object: OnboardingContent) {
         super.configure(with: object)
         imageView.image = object.image

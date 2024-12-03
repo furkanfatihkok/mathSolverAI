@@ -8,6 +8,9 @@
 import UIKit
 
 final class EmptyVC: UIViewController {
+    
+    // MARK: - Properties
+    private var solutionModel: SolutionModel?
     private let viewModel = HomeViewModel()
     
     // MARK: - UI Components

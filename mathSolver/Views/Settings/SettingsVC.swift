@@ -10,8 +10,10 @@ import NeonSDK
 
 final class SettingsVC: UIViewController {
 
+    // MARK: - Properties
     private let settingsOptions = SettingsOption.allCases
 
+    // MARK: - UI Components
     private lazy var tableView: NeonTableView<SettingsOption, SettingsCell> = {
         let tableView = NeonTableView<SettingsOption, SettingsCell>(
             objects: settingsOptions,
@@ -23,6 +25,7 @@ final class SettingsVC: UIViewController {
         return tableView
     }()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -34,6 +37,7 @@ final class SettingsVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
+    // MARK: - Setup Methods
     private func setupNavigationBar() {
         title = Constants.SettingsPage.title
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -72,6 +76,7 @@ final class SettingsVC: UIViewController {
         }
     }
 
+    // MARK: - Actions
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }

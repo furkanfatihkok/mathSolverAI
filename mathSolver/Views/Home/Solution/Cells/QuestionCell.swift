@@ -9,7 +9,8 @@ import SnapKit
 
 final class QuestionCell: UICollectionViewCell {
     static let identifier = Constants.Cells.QuestionCell.identifier
-    
+
+    // MARK: - UI Components
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -37,7 +38,8 @@ final class QuestionCell: UICollectionViewCell {
         label.lineBreakMode = .byWordWrapping
         return label
     }()
-    
+
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -46,7 +48,8 @@ final class QuestionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Setup Methods
     private func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(titleLabel)
@@ -68,7 +71,8 @@ final class QuestionCell: UICollectionViewCell {
             make.left.right.bottom.equalToSuperview().inset(16)
         }
     }
-    
+
+    // MARK: - Configure Cell
     func configure(question: String) {
         contentLabel.text = question
     }

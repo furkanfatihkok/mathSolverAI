@@ -10,10 +10,12 @@ import NeonSDK
 
 final class OnboardingVC: UIViewController {
 
+    // MARK: - Properties
     private let onboardingData = OnboardingContent.allCases
     private var currentPage: Int = 0
     private var isScrollingProgrammatically: Bool = false
 
+    // MARK: - UI Components
     private lazy var collectionView: NeonCollectionView<OnboardingContent, OnboardingCell> = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -51,6 +53,7 @@ final class OnboardingVC: UIViewController {
         return button
     }()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -66,6 +69,7 @@ final class OnboardingVC: UIViewController {
         collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - pageControl.frame.height - 150)
     }
 
+    // MARK: - Setup Methods
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         navigationItem.hidesBackButton = true
@@ -92,6 +96,7 @@ final class OnboardingVC: UIViewController {
         }
     }
 
+    // MARK: - Action Methods
     @objc private func continueButtonTapped() {
         if currentPage < onboardingData.count - 1 {
             currentPage += 1

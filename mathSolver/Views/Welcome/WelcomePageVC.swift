@@ -9,8 +9,11 @@ import UIKit
 import SnapKit
 
 final class WelcomePageVC: UIViewController {
+    
+    // MARK: - Properties
     private var currentSymbolIndex = 0
 
+    // MARK: - UI Components
     private lazy var animatedButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Constants.WelcomePage.animatedButtonSymbols[currentSymbolIndex], for: .normal)
@@ -48,6 +51,7 @@ final class WelcomePageVC: UIViewController {
         return button
     }()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -58,7 +62,8 @@ final class WelcomePageVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
+
+    // MARK: - Setup Methods
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(animatedButton)
@@ -91,6 +96,7 @@ final class WelcomePageVC: UIViewController {
         }
     }
 
+    // MARK: - Animation Methods
     private func startAnimation() {
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.animateSymbolChange()
@@ -102,6 +108,7 @@ final class WelcomePageVC: UIViewController {
         animatedButton.setTitle(Constants.WelcomePage.animatedButtonSymbols[currentSymbolIndex], for: .normal)
     }
 
+    // MARK: - Actions
     @objc private func continueButtonTapped() {
         let onboardingVC = OnboardingVC()
         navigationController?.pushViewController(onboardingVC, animated: true)

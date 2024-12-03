@@ -35,6 +35,7 @@
 		02D5B9DA2CF7356A00FECD96 /* SettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9D92CF7356A00FECD96 /* SettingsOption.swift */; };
 		02D5B9DD2CF7358900FECD96 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9DC2CF7358900FECD96 /* SettingsCell.swift */; };
 		02D5B9E12CF858C000FECD96 /* SubscriptionOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9E02CF858C000FECD96 /* SubscriptionOptionView.swift */; };
+		02F1411A2CFEE68000337281 /* SolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F141192CFEE68000337281 /* SolutionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		02D5B9D92CF7356A00FECD96 /* SettingsOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOption.swift; sourceTree = "<group>"; };
 		02D5B9DC2CF7358900FECD96 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		02D5B9E02CF858C000FECD96 /* SubscriptionOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionOptionView.swift; sourceTree = "<group>"; };
+		02F141192CFEE68000337281 /* SolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		02D5B9902CEE06E400FECD96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				02F141192CFEE68000337281 /* SolutionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				020B0C692CFDFE2100C7BCCC /* MathProblemManager.swift in Sources */,
 				02440FC52CFD9B1300185458 /* QuestionCell.swift in Sources */,
 				02440FBB2CFD97F900185458 /* CircleButtonManager.swift in Sources */,
+				02F1411A2CFEE68000337281 /* SolutionModel.swift in Sources */,
 				02D5B9862CEE026200FECD96 /* EmptyVC.swift in Sources */,
 				02440FC72CFD9B1D00185458 /* SolutionCell.swift in Sources */,
 				02D5B9DA2CF7356A00FECD96 /* SettingsOption.swift in Sources */,
