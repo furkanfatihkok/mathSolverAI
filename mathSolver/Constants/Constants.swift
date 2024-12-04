@@ -71,6 +71,22 @@ struct Constants {
             static let identifier = "OnboardingCell"
         }
         
+        struct HomeDateCell {
+            static let identifier = "HomeDateCell"
+        }
+        
+        struct HomeQuestionCell {
+            static let identifier = "HomeQuestionCell"
+        }
+        
+        struct HomeSolutionCell {
+            static let identifier = "HomeSolutionCell"
+        }
+        
+        struct HomeStepsCell {
+            static let identifier = "HomeStepsCell"
+        }
+        
         struct DateCell {
             static let identifier = "DateCell"
         }

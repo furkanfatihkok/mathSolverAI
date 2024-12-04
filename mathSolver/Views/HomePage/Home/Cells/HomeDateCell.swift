@@ -1,15 +1,15 @@
 //
-//  DateCell.swift
+//  HomeDateCell.swift
 //  mathSolver
 //
-//  Created by FFK on 2.12.2024.
+//  Created by FFK on 4.12.2024.
 //
 
 import UIKit
 import SnapKit
 
-final class DateCell: UICollectionViewCell {
-    static let identifier = Constants.Cells.DateCell.identifier
+final class HomeDateCell: UICollectionViewCell {
+    static let identifier = Constants.Cells.HomeDateCell.identifier
 
     // MARK: - UI Components
     private lazy var dateLabel: UILabel = {

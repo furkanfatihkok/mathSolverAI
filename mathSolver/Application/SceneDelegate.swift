@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let isOnboardingCompleted = UserDefaults.standard.bool(forKey: "isOnboardingCompleted")
         if isOnboardingCompleted {
-            let homeVC = EmptyVC()
-            let navigationController = UINavigationController(rootViewController: homeVC)
+            let emptyVC = EmptyVC()
+            let navigationController = UINavigationController(rootViewController: emptyVC)
             window.rootViewController = navigationController
         } else {
             let onboardingVC = WelcomePageVC()
