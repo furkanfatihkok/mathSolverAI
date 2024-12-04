@@ -152,7 +152,6 @@ final class PaywallVC: UIViewController {
         let navigationController = UINavigationController(rootViewController: emptyVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: false)
-        navigationController.pushViewController(emptyVC, animated: false)
     }
 
     @objc private func monthlyTapped() {
