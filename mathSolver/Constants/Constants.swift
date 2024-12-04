@@ -86,6 +86,14 @@ struct Constants {
         struct StepsCell {
             static let identifier = "StepsCell"
         }
+        
+        struct HistoryHeaderView {
+            static let identifier = "HistoryHeaderView"
+        }
+        
+        struct HistoryCell {
+            static let identifier = "HistoryCell"
+        }
     }
     
     struct Fonts {
@@ -101,7 +109,8 @@ struct Constants {
     struct Colors {
         static let purpleColor = UIColor(red: 129/255, green: 81/255, blue: 223/255, alpha: 1.0)
         static let darkGrayColor = UIColor.darkGray
-        static let backgroundColor = UIColor(red: 245/255, green: 247/255, blue: 252/255, alpha: 1.0)
+        static let navBarColor = UIColor(red: 245/255, green: 247/255, blue: 252/255, alpha: 1.0)
+        static let backgroundColor = UIColor(red: 250/255, green: 248/255, blue: 255/255, alpha: 1.0)
     }
     
     struct Layout {
@@ -111,6 +120,10 @@ struct Constants {
         
         static var buttonWidthFixed: CGFloat {
             return UIScreen.main.bounds.width * 0.9
+        }
+        
+        static var navBarHeight: CGFloat {
+            return UIDevice.current.userInterfaceIdiom == .pad ? 80 : 60
         }
         
         static let buttonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04

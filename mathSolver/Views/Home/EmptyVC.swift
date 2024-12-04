@@ -10,7 +10,6 @@ import UIKit
 final class EmptyVC: UIViewController {
     
     // MARK: - Properties
-//    private var solutionModel: SolutionModel?
     private let viewModel = HomeViewModel()
     
     // MARK: - UI Components
@@ -79,7 +78,7 @@ final class EmptyVC: UIViewController {
     
     // MARK: - Setup Methods
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(titleLabel)
         view.addSubview(settingsButton)
         view.addSubview(startLabel)
@@ -152,8 +151,9 @@ final class EmptyVC: UIViewController {
     }
     
     private func navigateToSolutionScreen(question: String, solution: String, steps: [String]) {
+        let solutionModel = Solution(question: question, solution: solution, steps: steps)
         let solutionVC = SolutionVC()
-        solutionVC.setupSolutionData(question: question, solution: solution, steps: steps)
+        solutionVC.setupSolutionData(solution: solutionModel)
         navigationController?.pushViewController(solutionVC, animated: true)
     }
 }

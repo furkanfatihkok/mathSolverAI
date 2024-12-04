@@ -17,6 +17,13 @@
 		02440FC72CFD9B1D00185458 /* SolutionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02440FC62CFD9B1D00185458 /* SolutionCell.swift */; };
 		02440FC92CFD9B3100185458 /* StepsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02440FC82CFD9B3100185458 /* StepsCell.swift */; };
 		0262C6912CFF14D500525F3D /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6902CFF14D500525F3D /* HistoryVC.swift */; };
+		0262C6942CFF1BD000525F3D /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6932CFF1BD000525F3D /* HistoryCell.swift */; };
+		0262C6962CFF1C3600525F3D /* HistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6952CFF1C3600525F3D /* HistoryHeaderView.swift */; };
+		0262C6982CFF1DA500525F3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0262C6972CFF1DA500525F3D /* GoogleService-Info.plist */; };
+		0262C69B2CFF1F9C00525F3D /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C69A2CFF1F9C00525F3D /* HistoryManager.swift */; };
+		0262C6A02CFF21A800525F3D /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C69F2CFF21A800525F3D /* HistoryViewModel.swift */; };
+		0262C6A22CFF297700525F3D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0262C6A12CFF297700525F3D /* FirebaseFirestore */; };
+		0262C6A72D004B0900525F3D /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6A62D004B0900525F3D /* CustomNavigationBar.swift */; };
 		027BA4D42CEDFBA500DABD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027BA4D32CEDFBA500DABD30 /* AppDelegate.swift */; };
 		027BA4D62CEDFBA500DABD30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027BA4D52CEDFBA500DABD30 /* SceneDelegate.swift */; };
 		027BA4DD2CEDFBA600DABD30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027BA4DC2CEDFBA600DABD30 /* Assets.xcassets */; };
@@ -50,6 +57,12 @@
 		02440FC62CFD9B1D00185458 /* SolutionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionCell.swift; sourceTree = "<group>"; };
 		02440FC82CFD9B3100185458 /* StepsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsCell.swift; sourceTree = "<group>"; };
 		0262C6902CFF14D500525F3D /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		0262C6932CFF1BD000525F3D /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		0262C6952CFF1C3600525F3D /* HistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryHeaderView.swift; sourceTree = "<group>"; };
+		0262C6972CFF1DA500525F3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0262C69A2CFF1F9C00525F3D /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
+		0262C69F2CFF21A800525F3D /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		0262C6A62D004B0900525F3D /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		027BA4D02CEDFBA500DABD30 /* mathSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mathSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027BA4D32CEDFBA500DABD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027BA4D52CEDFBA500DABD30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02F1411E2CFEF23600337281 /* NeonSDK in Frameworks */,
+				0262C6A22CFF297700525F3D /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,8 +123,26 @@
 			isa = PBXGroup;
 			children = (
 				0262C6902CFF14D500525F3D /* HistoryVC.swift */,
+				0262C6922CFF1BBA00525F3D /* Cells */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		0262C6922CFF1BBA00525F3D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0262C6952CFF1C3600525F3D /* HistoryHeaderView.swift */,
+				0262C6932CFF1BD000525F3D /* HistoryCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0262C6A52D004AE000525F3D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0262C6A62D004B0900525F3D /* CustomNavigationBar.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		027BA4C72CEDFBA500DABD30 = {
@@ -136,10 +168,11 @@
 				02D5B98F2CEE054800FECD96 /* Resources */,
 				02D5B9D02CF7015100FECD96 /* Manager */,
 				02D5B9BD2CEE1D2F00FECD96 /* Extensions */,
+				0262C6A52D004AE000525F3D /* Components */,
 				02D5B9D32CF7080900FECD96 /* Constants */,
 				02D5B9C42CF5F95A00FECD96 /* Enums */,
-				02D5B9902CEE06E400FECD96 /* Model */,
-				02D5B9912CEE06EB00FECD96 /* ViewModel */,
+				02D5B9902CEE06E400FECD96 /* Models */,
+				02D5B9912CEE06EB00FECD96 /* ViewModels */,
 				02D5B9922CEE06EE00FECD96 /* Views */,
 			);
 			path = mathSolver;
@@ -152,6 +185,7 @@
 				027BA4D52CEDFBA500DABD30 /* SceneDelegate.swift */,
 				027BA4DE2CEDFBA600DABD30 /* LaunchScreen.storyboard */,
 				027BA4E12CEDFBA600DABD30 /* Info.plist */,
+				0262C6972CFF1DA500525F3D /* GoogleService-Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -165,20 +199,21 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		02D5B9902CEE06E400FECD96 /* Model */ = {
+		02D5B9902CEE06E400FECD96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				02F141192CFEE68000337281 /* SolutionModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		02D5B9912CEE06EB00FECD96 /* ViewModel */ = {
+		02D5B9912CEE06EB00FECD96 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				0231B52F2CF9DFE300AC4C72 /* HomeViewModel.swift */,
+				0262C69F2CFF21A800525F3D /* HistoryViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		02D5B9922CEE06EE00FECD96 /* Views */ = {
@@ -277,6 +312,7 @@
 				02440FBA2CFD97F900185458 /* CircleButtonManager.swift */,
 				02440FBC2CFD980500185458 /* AlertManager.swift */,
 				020B0C682CFDFE2100C7BCCC /* MathProblemManager.swift */,
+				0262C69A2CFF1F9C00525F3D /* HistoryManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -324,6 +360,7 @@
 			name = mathSolver;
 			packageProductDependencies = (
 				02F1411D2CFEF23600337281 /* NeonSDK */,
+				0262C6A12CFF297700525F3D /* FirebaseFirestore */,
 			);
 			productName = mathSolver;
 			productReference = 027BA4D02CEDFBA500DABD30 /* mathSolver.app */;
@@ -355,6 +392,7 @@
 			mainGroup = 027BA4C72CEDFBA500DABD30;
 			packageReferences = (
 				02D5B9802CEE00BE00FECD96 /* XCRemoteSwiftPackageReference "neon-sdk" */,
+				0262C69C2CFF206000525F3D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 027BA4D12CEDFBA500DABD30 /* Products */;
 			projectDirPath = "";
@@ -372,6 +410,7 @@
 			files = (
 				02D5B9B82CEE1A9000FECD96 /* Poppins-Regular.ttf in Resources */,
 				02D5B9AD2CEE1A9000FECD96 /* Poppins-Bold.ttf in Resources */,
+				0262C6982CFF1DA500525F3D /* GoogleService-Info.plist in Resources */,
 				027BA4DD2CEDFBA600DABD30 /* Assets.xcassets in Resources */,
 				027BA4E02CEDFBA600DABD30 /* Base in Resources */,
 			);
@@ -387,8 +426,11 @@
 				02D5B9E12CF858C000FECD96 /* SubscriptionOptionView.swift in Sources */,
 				02440FC92CFD9B3100185458 /* StepsCell.swift in Sources */,
 				0231B5302CF9DFE300AC4C72 /* HomeViewModel.swift in Sources */,
+				0262C6962CFF1C3600525F3D /* HistoryHeaderView.swift in Sources */,
+				0262C69B2CFF1F9C00525F3D /* HistoryManager.swift in Sources */,
 				0231B5322CF9DFF700AC4C72 /* SolutionVC.swift in Sources */,
 				02D5B9DD2CF7358900FECD96 /* SettingsCell.swift in Sources */,
+				0262C6A02CFF21A800525F3D /* HistoryViewModel.swift in Sources */,
 				02D5B9882CEE026D00FECD96 /* PaywallVC.swift in Sources */,
 				02D5B9C62CF5F96600FECD96 /* OnboardingContent.swift in Sources */,
 				02D5B9CF2CF61C8200FECD96 /* WelcomePageVC.swift in Sources */,
@@ -400,10 +442,12 @@
 				02D5B9862CEE026200FECD96 /* EmptyVC.swift in Sources */,
 				02440FC72CFD9B1D00185458 /* SolutionCell.swift in Sources */,
 				02D5B9DA2CF7356A00FECD96 /* SettingsOption.swift in Sources */,
+				0262C6942CFF1BD000525F3D /* HistoryCell.swift in Sources */,
 				02D5B9D82CF72ECA00FECD96 /* SettingsVC.swift in Sources */,
 				02440FBD2CFD980500185458 /* AlertManager.swift in Sources */,
 				02D5B9D52CF7082000FECD96 /* Constants.swift in Sources */,
 				02D5B9842CEE025900FECD96 /* OnboardingVC.swift in Sources */,
+				0262C6A72D004B0900525F3D /* CustomNavigationBar.swift in Sources */,
 				02D5B9C12CEE1E6F00FECD96 /* UIButton.swift in Sources */,
 				0262C6912CFF14D500525F3D /* HistoryVC.swift in Sources */,
 				02D5B9CC2CF5FCE500FECD96 /* OnboardingCell.swift in Sources */,
@@ -625,6 +669,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0262C69C2CFF206000525F3D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
 		02D5B9802CEE00BE00FECD96 /* XCRemoteSwiftPackageReference "neon-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/neon-apps/neon-sdk.git";
@@ -636,6 +688,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0262C6A12CFF297700525F3D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0262C69C2CFF206000525F3D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		02F1411D2CFEF23600337281 /* NeonSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 02D5B9802CEE00BE00FECD96 /* XCRemoteSwiftPackageReference "neon-sdk" */;
