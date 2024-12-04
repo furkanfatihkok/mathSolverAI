@@ -71,7 +71,7 @@ final class OnboardingVC: UIViewController {
 
     // MARK: - Setup Methods
     private func setupViews() {
-        view.backgroundColor = Constants.Colors.backgroundColor
+        view.backgroundColor = Constants.Colors.navBarColor
         navigationItem.hidesBackButton = true
         view.addSubview(collectionView)
         view.addSubview(pageControl)

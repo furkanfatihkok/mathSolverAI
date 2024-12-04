@@ -65,7 +65,7 @@ final class SettingsVC: UIViewController {
     }
 
     private func setupViews() {
-        view.backgroundColor = UIColor(red: 245/255, green: 247/255, blue: 252/255, alpha: 1.0)
+        view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
