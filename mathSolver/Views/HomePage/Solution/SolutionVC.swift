@@ -10,6 +10,7 @@ import SnapKit
 
 final class SolutionVC: UIViewController {
     
+    // MARK: - Properties
     var onSolutionUpdated: ((Solution) -> Void)?
     
     private let homeVM = HomeViewModel()
@@ -69,9 +70,6 @@ final class SolutionVC: UIViewController {
             make.top.equalTo(customNavBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
-//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 140, right: 0)
-//        collectionView.scrollIndicatorInsets = collectionView.contentInset
     }
     
     private func bindViewModel() {
@@ -96,6 +94,7 @@ final class SolutionVC: UIViewController {
         }
     }
     
+    // MARK: - Actions
     @objc private func backButtonTapped() {
         if let solution = solutionModel {
             let homeVC = HomeVC()
@@ -106,6 +105,7 @@ final class SolutionVC: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension SolutionVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         3

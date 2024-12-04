@@ -9,10 +9,12 @@ import UIKit
 
 final class HistoryVC: UIViewController {
     
+    // MARK: - Properties
     private var historyData: [String: [[String: Any]]] = [:]
     private var sortedKeys: [String] = []
     private let viewModel = HistoryViewModel()
     
+    // MARK: - UI Components
     private lazy var customNavBar: CustomNavigationBar = {
         let navBar = CustomNavigationBar()
         navBar.configure(title: "History", backAction: #selector(backButtonTapped), target: self)
@@ -35,12 +37,14 @@ final class HistoryVC: UIViewController {
         return collectionView
     }()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         fetchHistory()
     }
     
+    // MARK: - Private Methods
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(customNavBar)
@@ -58,10 +62,6 @@ final class HistoryVC: UIViewController {
         }
     }
     
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     private func fetchHistory() {
         viewModel.fetchHistory { [weak self] result in
             DispatchQueue.main.async {
@@ -74,8 +74,14 @@ final class HistoryVC: UIViewController {
             }
         }
     }
+    
+    // MARK: - Actions
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HistoryVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.getSortedKeys().count
@@ -86,6 +92,13 @@ extension HistoryVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return viewModel.getGroupedSolutions()[key]?.count ?? 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HistoryHeaderView.identifier, for: indexPath) as! HistoryHeaderView
+        let key = viewModel.getSortedKeys()[indexPath.section]
+        header.configure(with: key)
+        return header
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HistoryCell.identifier, for: indexPath) as! HistoryCell
         let key = viewModel.getSortedKeys()[indexPath.section]
@@ -94,15 +107,9 @@ extension HistoryVC: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HistoryHeaderView.identifier, for: indexPath) as! HistoryHeaderView
-        let key = viewModel.getSortedKeys()[indexPath.section]
-        header.configure(with: key)
-        return header
-    }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension HistoryVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 32)

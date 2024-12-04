@@ -8,6 +8,8 @@
 import UIKit
 
 final class HomeVC: UIViewController {
+    
+    // MARK: - Properties
     private let homeVM = HomeViewModel()
     private let historyVM = HistoryViewModel()
     private var solutionModel: Solution?
@@ -129,10 +131,6 @@ final class HomeVC: UIViewController {
         activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
-        view.bringSubviewToFront(circleButton)
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 140, right: 0)
-        collectionView.scrollIndicatorInsets = collectionView.contentInset
     }
     
     private func bindViewModel() {
@@ -170,8 +168,9 @@ final class HomeVC: UIViewController {
                 print("Error saving to history: \(error.localizedDescription)")
             }
         }
-    }  
+    }
     
+    // MARK: - Actions
     @objc private func settingsButtonTapped() {
         let settingsVC = SettingsVC()
         navigationController?.pushViewController(settingsVC, animated: true)
@@ -191,6 +190,7 @@ final class HomeVC: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         4
