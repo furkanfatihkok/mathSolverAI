@@ -1,27 +1,18 @@
 //
-//  SolutionVC.swift
+//  HomeVC.swift
 //  mathSolver
 //
 //  Created by FFK on 29.11.2024.
 //
 
 import UIKit
-import SnapKit
 
-#warning("Navbar ekle")
-
-final class SolutionVC: UIViewController {
+final class HomeVC: UIViewController {
     private let homeVM = HomeViewModel()
     private let historyVM = HistoryViewModel()
     private var solutionModel: Solution?
-    
+
     // MARK: - UI Components
-    private lazy var customNavBar: CustomNavigationBar = {
-        let navBar = CustomNavigationBar()
-        navBar.configure(title: "Solution", backAction: #selector(backButtonTapped), target: self)
-        return navBar
-    }()
-    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.HomePage.EmptyVC.title
@@ -31,11 +22,18 @@ final class SolutionVC: UIViewController {
         return label
     }()
     
+    private lazy var settingsButton: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(systemName: Constants.HomePage.EmptyVC.settingsIcon)?.withTintColor(Constants.Colors.purpleColor, renderingMode: .alwaysOriginal)
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
     private lazy var historyButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("History", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        button.setTitleColor(Constants.Colors.purpleColor, for: .normal)
+        let image = UIImage(systemName: "tray.full")?.withTintColor(Constants.Colors.purpleColor, renderingMode: .alwaysOriginal)
+        button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -51,10 +49,10 @@ final class SolutionVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor(white: 0.97, alpha: 1)
-        collectionView.register(DateCell.self, forCellWithReuseIdentifier: DateCell.identifier)
-        collectionView.register(QuestionCell.self, forCellWithReuseIdentifier: QuestionCell.identifier)
-        collectionView.register(SolutionCell.self, forCellWithReuseIdentifier: SolutionCell.identifier)
-        collectionView.register(StepsCell.self, forCellWithReuseIdentifier: StepsCell.identifier)
+        collectionView.register(HomeDateCell.self, forCellWithReuseIdentifier: HomeDateCell.identifier)
+        collectionView.register(HomeQuestionCell.self, forCellWithReuseIdentifier: HomeQuestionCell.identifier)
+        collectionView.register(HomeSolutionCell.self, forCellWithReuseIdentifier: HomeSolutionCell.identifier)
+        collectionView.register(HomeStepsCell.self, forCellWithReuseIdentifier: HomeStepsCell.identifier)
         return collectionView
     }()
     
@@ -80,16 +78,23 @@ final class SolutionVC: UIViewController {
         bindViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     // MARK: - Public Methods
     func setupSolutionData(solution: Solution) {
         self.solutionModel = solution
         collectionView.reloadData()
+        saveToHistory(solution)
     }
     
     // MARK: - Private Methods
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(titleLabel)
+        view.addSubview(settingsButton)
         view.addSubview(historyButton)
         view.addSubview(collectionView)
         view.addSubview(circleButton)
@@ -100,8 +105,13 @@ final class SolutionVC: UIViewController {
             make.centerX.equalToSuperview()
         }
         
-        historyButton.snp.makeConstraints { make in
+        settingsButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
+        }
+        
+        historyButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
         }
         
@@ -151,24 +161,25 @@ final class SolutionVC: UIViewController {
         }
     }
     
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc private func historyButtonTapped() {
-        guard let solutionModel = solutionModel else { return }
-        
-        historyVM.saveSolution(solutionModel) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    let historyVC = HistoryVC()
-                    self?.navigationController?.pushViewController(historyVC, animated: true)
-                case .failure(let error):
-                    print("Error saving solution: \(error.localizedDescription)")
-                }
+    private func saveToHistory(_ solution: Solution) {
+        historyVM.saveSolution(solution) { result in
+            switch result {
+            case .success:
+                print("Solution saved to history.")
+            case .failure(let error):
+                print("Error saving to history: \(error.localizedDescription)")
             }
         }
+    }  
+    
+    @objc private func settingsButtonTapped() {
+        let settingsVC = SettingsVC()
+        navigationController?.pushViewController(settingsVC, animated: true)
+    }
+
+    @objc private func historyButtonTapped() {
+        let historyVC = HistoryVC()
+        navigationController?.pushViewController(historyVC, animated: true)
     }
     
     @objc private func circleButtonTapped() {
@@ -180,7 +191,7 @@ final class SolutionVC: UIViewController {
     }
 }
 
-extension SolutionVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         4
     }
@@ -192,19 +203,19 @@ extension SolutionVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DateCell.identifier, for: indexPath) as! DateCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeDateCell.identifier, for: indexPath) as! HomeDateCell
             cell.configureDate()
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuestionCell.identifier, for: indexPath) as! QuestionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeQuestionCell.identifier, for: indexPath) as! HomeQuestionCell
             cell.configure(question: solutionModel?.question ?? "no data question")
             return cell
         case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SolutionCell.identifier, for: indexPath) as! SolutionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSolutionCell.identifier, for: indexPath) as! HomeSolutionCell
             cell.configure(solution: solutionModel?.solution ?? "no data solution")
             return cell
         case 3:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StepsCell.identifier, for: indexPath) as! StepsCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeStepsCell.identifier, for: indexPath) as! HomeStepsCell
             cell.configure(steps: solutionModel?.steps ?? ["no data question"])
             return cell
         default:
@@ -214,7 +225,7 @@ extension SolutionVC: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension SolutionVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             activityIndicator.startAnimating()
