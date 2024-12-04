@@ -79,7 +79,7 @@ final class PaywallVC: UIViewController {
 
     // MARK: - Setup Methods
     private func setupViews() {
-        view.backgroundColor = Constants.Colors.backgroundColor
+        view.backgroundColor = Constants.Colors.navBarColor
         view.addSubview(closeButton)
         view.addSubview(crownImageView)
         view.addSubview(titleLabel)

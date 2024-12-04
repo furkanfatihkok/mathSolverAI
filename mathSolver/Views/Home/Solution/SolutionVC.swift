@@ -8,15 +8,20 @@
 import UIKit
 import SnapKit
 
+#warning("Navbar ekle")
+
 final class SolutionVC: UIViewController {
-    private let viewModel = HomeViewModel()
-    
-    // MARK: - Properties
-    private var question: String = ""
-    private var solution: String = ""
-    private var steps: [String] = []
+    private let homeVM = HomeViewModel()
+    private let historyVM = HistoryViewModel()
+    private var solutionModel: Solution?
     
     // MARK: - UI Components
+    private lazy var customNavBar: CustomNavigationBar = {
+        let navBar = CustomNavigationBar()
+        navBar.configure(title: "Solution", backAction: #selector(backButtonTapped), target: self)
+        return navBar
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.HomePage.EmptyVC.title
@@ -25,7 +30,16 @@ final class SolutionVC: UIViewController {
         label.textAlignment = .center
         return label
     }()
-
+    
+    private lazy var historyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("History", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        button.setTitleColor(Constants.Colors.purpleColor, for: .normal)
+        button.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -67,10 +81,8 @@ final class SolutionVC: UIViewController {
     }
     
     // MARK: - Public Methods
-    func setupSolutionData(question: String, solution: String, steps: [String]) {
-        self.question = question
-        self.solution = solution
-        self.steps = steps
+    func setupSolutionData(solution: Solution) {
+        self.solutionModel = solution
         collectionView.reloadData()
     }
     
@@ -78,6 +90,7 @@ final class SolutionVC: UIViewController {
     private func setupViews() {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(titleLabel)
+        view.addSubview(historyButton)
         view.addSubview(collectionView)
         view.addSubview(circleButton)
         view.addSubview(activityIndicator)
@@ -85,6 +98,11 @@ final class SolutionVC: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.centerX.equalToSuperview()
+        }
+        
+        historyButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
         }
         
         collectionView.snp.makeConstraints { make in
@@ -108,10 +126,11 @@ final class SolutionVC: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.solvedResult = { [weak self] question, solution in
+        homeVM.solvedResult = { [weak self] question, solution in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
-                self?.setupSolutionData(
+                
+                let solutionModel = Solution(
                     question: question,
                     solution: solution,
                     steps: [
@@ -120,13 +139,34 @@ final class SolutionVC: UIViewController {
                         "Step 3: \(solution)"
                     ]
                 )
+                self?.setupSolutionData(solution: solutionModel)
             }
         }
         
-        viewModel.showError = { [weak self] error in
+        homeVM.showError = { [weak self] error in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
                 AlertManager.shared.showAlert(on: self!, title: "Error", message: error)
+            }
+        }
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func historyButtonTapped() {
+        guard let solutionModel = solutionModel else { return }
+        
+        historyVM.saveSolution(solutionModel) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    let historyVC = HistoryVC()
+                    self?.navigationController?.pushViewController(historyVC, animated: true)
+                case .failure(let error):
+                    print("Error saving solution: \(error.localizedDescription)")
+                }
             }
         }
     }
@@ -135,7 +175,7 @@ final class SolutionVC: UIViewController {
         CircleButtonManager.shared.presentActionSheet(on: self) { [weak self] selectedImage in
             guard let self = self, let image = selectedImage else { return }
             self.activityIndicator.startAnimating()
-            self.viewModel.processImage(image: image)
+            self.homeVM.processImage(image: image)
         }
     }
 }
@@ -157,15 +197,15 @@ extension SolutionVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuestionCell.identifier, for: indexPath) as! QuestionCell
-            cell.configure(question: question)
+            cell.configure(question: solutionModel?.question ?? "no data question")
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SolutionCell.identifier, for: indexPath) as! SolutionCell
-            cell.configure(solution: solution)
+            cell.configure(solution: solutionModel?.solution ?? "no data solution")
             return cell
         case 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StepsCell.identifier, for: indexPath) as! StepsCell
-            cell.configure(steps: steps)
+            cell.configure(steps: solutionModel?.steps ?? ["no data question"])
             return cell
         default:
             fatalError("Invalid section")
@@ -178,7 +218,7 @@ extension SolutionVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             activityIndicator.startAnimating()
-            viewModel.processImage(image: image)
+            homeVM.processImage(image: image)
         }
         picker.dismiss(animated: true, completion: nil)
     }

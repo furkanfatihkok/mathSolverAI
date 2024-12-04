@@ -65,7 +65,7 @@ final class WelcomePageVC: UIViewController {
 
     // MARK: - Setup Methods
     private func setupViews() {
-        view.backgroundColor = Constants.Colors.backgroundColor
+        view.backgroundColor = Constants.Colors.navBarColor
         view.addSubview(animatedButton)
         view.addSubview(ellipsisImageView)
         view.addSubview(titleLabel)
