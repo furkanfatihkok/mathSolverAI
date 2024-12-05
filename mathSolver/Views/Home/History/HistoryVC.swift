@@ -90,6 +90,7 @@ final class HistoryVC: UIViewController {
     }
     
     private func deleteAll() {
+        #warning("delete yapınca alert gözükmesin yerine emptyVC gözüksün")
         viewModel.deleteAllSolutions { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

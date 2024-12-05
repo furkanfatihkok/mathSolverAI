@@ -69,7 +69,11 @@ final class HistoryViewModel {
             }
         }
     }
-
+    func getLastestSolution() -> Solution? {
+        guard let latestKey = getSortedKeys().first else { return nil }
+        return getGroupedSolutions()[latestKey]?.first
+    }
+    
     func getGroupedSolutions() -> [String: [Solution]] {
         return groupedSolutions
     }
