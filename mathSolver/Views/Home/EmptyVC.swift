@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+#warning("indicator ekle")
 final class EmptyVC: UIViewController {
     
     // MARK: - Properties
