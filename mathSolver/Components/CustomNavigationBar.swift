@@ -17,14 +17,17 @@ final class CustomNavigationBar: UIView {
         return label
     }()
     
-    private lazy var backButton: UIButton = {
+    private lazy var leftButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(systemName: "chevron.left")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(image, for: .normal)
         button.tintColor = Constants.Colors.purpleColor
         return button
     }()
-
+    
+    lazy var rightButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = Constants.Colors.purpleColor
+        return button
+    }()
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -40,10 +43,16 @@ final class CustomNavigationBar: UIView {
     private func setupViews() {
         backgroundColor = Constants.Colors.navBarColor
         addSubview(titleLabel)
-        addSubview(backButton)
+        addSubview(leftButton)
+        addSubview(rightButton)
         
-        backButton.snp.makeConstraints { make in
+        leftButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+        }
+        
+        rightButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
         }
         
@@ -53,8 +62,15 @@ final class CustomNavigationBar: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(title: String, backAction: Selector, target: Any) {
+    func configure(title: String, leftAction: Selector, rightAction: Selector, target: Any, leftImage: UIImage?, rightImage: UIImage?) {
         titleLabel.text = title
-        backButton.addTarget(target, action: backAction, for: .touchUpInside)
+        leftButton.addTarget(target, action: leftAction, for: .touchUpInside)
+        rightButton.addTarget(target, action: rightAction, for: .touchUpInside)
+        if let leftImage = leftImage {
+            leftButton.setImage(leftImage.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+        if let rightImage = rightImage {
+            rightButton.setImage(rightImage.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
     }
 }

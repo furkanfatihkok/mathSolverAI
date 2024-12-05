@@ -23,11 +23,11 @@
 		0262C6A02CFF21A800525F3D /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C69F2CFF21A800525F3D /* HistoryViewModel.swift */; };
 		0262C6A22CFF297700525F3D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0262C6A12CFF297700525F3D /* FirebaseFirestore */; };
 		0262C6A72D004B0900525F3D /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6A62D004B0900525F3D /* CustomNavigationBar.swift */; };
-		0262C6AA2D00541300525F3D /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6A92D00541300525F3D /* HomeVC.swift */; };
-		0262C6AE2D00544100525F3D /* HomeDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6AD2D00544100525F3D /* HomeDateCell.swift */; };
-		0262C6B02D00544900525F3D /* HomeQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6AF2D00544900525F3D /* HomeQuestionCell.swift */; };
-		0262C6B22D00545100525F3D /* HomeSolutionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6B12D00545100525F3D /* HomeSolutionCell.swift */; };
-		0262C6B42D00545900525F3D /* HomeStepsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6B32D00545900525F3D /* HomeStepsCell.swift */; };
+		0262C6AA2D00541300525F3D /* LearnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6A92D00541300525F3D /* LearnVC.swift */; };
+		0262C6AE2D00544100525F3D /* LearnDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6AD2D00544100525F3D /* LearnDateCell.swift */; };
+		0262C6B02D00544900525F3D /* LearnQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6AF2D00544900525F3D /* LearnQuestionCell.swift */; };
+		0262C6B22D00545100525F3D /* LearnSolutionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6B12D00545100525F3D /* LearnSolutionCell.swift */; };
+		0262C6B42D00545900525F3D /* LearnStepsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262C6B32D00545900525F3D /* LearnStepsCell.swift */; };
 		027BA4D42CEDFBA500DABD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027BA4D32CEDFBA500DABD30 /* AppDelegate.swift */; };
 		027BA4D62CEDFBA500DABD30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027BA4D52CEDFBA500DABD30 /* SceneDelegate.swift */; };
 		027BA4DD2CEDFBA600DABD30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027BA4DC2CEDFBA600DABD30 /* Assets.xcassets */; };
@@ -66,11 +66,11 @@
 		0262C69A2CFF1F9C00525F3D /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		0262C69F2CFF21A800525F3D /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		0262C6A62D004B0900525F3D /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
-		0262C6A92D00541300525F3D /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		0262C6AD2D00544100525F3D /* HomeDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDateCell.swift; sourceTree = "<group>"; };
-		0262C6AF2D00544900525F3D /* HomeQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQuestionCell.swift; sourceTree = "<group>"; };
-		0262C6B12D00545100525F3D /* HomeSolutionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSolutionCell.swift; sourceTree = "<group>"; };
-		0262C6B32D00545900525F3D /* HomeStepsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStepsCell.swift; sourceTree = "<group>"; };
+		0262C6A92D00541300525F3D /* LearnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnVC.swift; sourceTree = "<group>"; };
+		0262C6AD2D00544100525F3D /* LearnDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnDateCell.swift; sourceTree = "<group>"; };
+		0262C6AF2D00544900525F3D /* LearnQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnQuestionCell.swift; sourceTree = "<group>"; };
+		0262C6B12D00545100525F3D /* LearnSolutionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnSolutionCell.swift; sourceTree = "<group>"; };
+		0262C6B32D00545900525F3D /* LearnStepsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnStepsCell.swift; sourceTree = "<group>"; };
 		027BA4D02CEDFBA500DABD30 /* mathSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mathSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027BA4D32CEDFBA500DABD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027BA4D52CEDFBA500DABD30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,22 +152,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		0262C6AB2D00542200525F3D /* Home */ = {
+		0262C6AB2D00542200525F3D /* Learn */ = {
 			isa = PBXGroup;
 			children = (
-				0262C6A92D00541300525F3D /* HomeVC.swift */,
+				0262C6A92D00541300525F3D /* LearnVC.swift */,
 				0262C6AC2D00542E00525F3D /* Cells */,
 			);
-			path = Home;
+			path = Learn;
 			sourceTree = "<group>";
 		};
 		0262C6AC2D00542E00525F3D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0262C6AD2D00544100525F3D /* HomeDateCell.swift */,
-				0262C6AF2D00544900525F3D /* HomeQuestionCell.swift */,
-				0262C6B12D00545100525F3D /* HomeSolutionCell.swift */,
-				0262C6B32D00545900525F3D /* HomeStepsCell.swift */,
+				0262C6AD2D00544100525F3D /* LearnDateCell.swift */,
+				0262C6AF2D00544900525F3D /* LearnQuestionCell.swift */,
+				0262C6B12D00545100525F3D /* LearnSolutionCell.swift */,
+				0262C6B32D00545900525F3D /* LearnStepsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -249,7 +249,7 @@
 				02D5B9CD2CF61C6800FECD96 /* Welcome */,
 				02D5B9C82CF5FC9B00FECD96 /* Onboarding */,
 				02D5B9C92CF5FCAA00FECD96 /* Paywall */,
-				02D5B9CA2CF5FCB300FECD96 /* HomePage */,
+				02D5B9CA2CF5FCB300FECD96 /* Home */,
 				02D5B9D62CF72EB700FECD96 /* Settings */,
 			);
 			path = Views;
@@ -315,15 +315,15 @@
 			path = Paywall;
 			sourceTree = "<group>";
 		};
-		02D5B9CA2CF5FCB300FECD96 /* HomePage */ = {
+		02D5B9CA2CF5FCB300FECD96 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				02D5B9852CEE026200FECD96 /* EmptyVC.swift */,
-				0262C6AB2D00542200525F3D /* Home */,
+				0262C6AB2D00542200525F3D /* Learn */,
 				02440FC02CFD9ADD00185458 /* Solution */,
 				0262C68F2CFF14CE00525F3D /* History */,
 			);
-			path = HomePage;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		02D5B9CD2CF61C6800FECD96 /* Welcome */ = {
@@ -452,12 +452,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				02D5B9E12CF858C000FECD96 /* SubscriptionOptionView.swift in Sources */,
-				0262C6B22D00545100525F3D /* HomeSolutionCell.swift in Sources */,
+				0262C6B22D00545100525F3D /* LearnSolutionCell.swift in Sources */,
 				02440FC92CFD9B3100185458 /* StepsCell.swift in Sources */,
 				0231B5302CF9DFE300AC4C72 /* HomeViewModel.swift in Sources */,
 				0262C6962CFF1C3600525F3D /* HistoryHeaderView.swift in Sources */,
 				0262C69B2CFF1F9C00525F3D /* HistoryManager.swift in Sources */,
-				0262C6B02D00544900525F3D /* HomeQuestionCell.swift in Sources */,
+				0262C6B02D00544900525F3D /* LearnQuestionCell.swift in Sources */,
 				0231B5322CF9DFF700AC4C72 /* SolutionVC.swift in Sources */,
 				02D5B9DD2CF7358900FECD96 /* SettingsCell.swift in Sources */,
 				0262C6A02CFF21A800525F3D /* HistoryViewModel.swift in Sources */,
@@ -466,14 +466,14 @@
 				02D5B9CF2CF61C8200FECD96 /* WelcomePageVC.swift in Sources */,
 				020B0C692CFDFE2100C7BCCC /* MathProblemManager.swift in Sources */,
 				02440FC52CFD9B1300185458 /* QuestionCell.swift in Sources */,
-				0262C6B42D00545900525F3D /* HomeStepsCell.swift in Sources */,
+				0262C6B42D00545900525F3D /* LearnStepsCell.swift in Sources */,
 				02440FBB2CFD97F900185458 /* CircleButtonManager.swift in Sources */,
-				0262C6AA2D00541300525F3D /* HomeVC.swift in Sources */,
+				0262C6AA2D00541300525F3D /* LearnVC.swift in Sources */,
 				02F1411A2CFEE68000337281 /* SolutionModel.swift in Sources */,
 				02D5B9862CEE026200FECD96 /* EmptyVC.swift in Sources */,
 				02440FC72CFD9B1D00185458 /* SolutionCell.swift in Sources */,
 				02D5B9DA2CF7356A00FECD96 /* SettingsOption.swift in Sources */,
-				0262C6AE2D00544100525F3D /* HomeDateCell.swift in Sources */,
+				0262C6AE2D00544100525F3D /* LearnDateCell.swift in Sources */,
 				0262C6942CFF1BD000525F3D /* HistoryCell.swift in Sources */,
 				02D5B9D82CF72ECA00FECD96 /* SettingsVC.swift in Sources */,
 				02440FBD2CFD980500185458 /* AlertManager.swift in Sources */,
