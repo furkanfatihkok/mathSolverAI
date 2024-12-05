@@ -142,23 +142,10 @@ final class EmptyVC: UIViewController {
         navigationController?.pushViewController(solutionVC, animated: true)
     }
     
-    private func saveToHistory(question: String, solution: String, steps: [String]) {
-        let solutionModel = Solution(question: question, solution: solution, steps: steps)
-        HistoryManager.shared.saveSolution(solutionModel) { result in
-            switch result {
-            case .success:
-                print("Saved to history successfully.")
-            case .failure(let error):
-                print("Failed to save to history: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     private func setupBindings() {
         viewModel.solvedResult = { [weak self] question, solution in
             DispatchQueue.main.async {
                 let stepsFromAPI = ["Step 1: \(question)", "Step 2: Analyze solution", "Step 3: \(solution)"]
-                self?.saveToHistory(question: question, solution: solution, steps: stepsFromAPI)
                 self?.navigateToSolutionScreen(question: question, solution: solution, steps: stepsFromAPI)
             }
         }
