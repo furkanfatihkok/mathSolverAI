@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseFirestore
 
+#warning("history string dinamik hale getir")
+
 final class HistoryManager {
     static let shared = HistoryManager()
     private let database = Firestore.firestore()
@@ -25,6 +27,38 @@ final class HistoryManager {
             }
         } catch let error {
             completion(.failure(error))
+        }
+    }
+    
+    func deleteAllSolutions(completion: @escaping (Result<Void, Error>) -> Void) {
+        database.collection("history").getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            let batch = self.database.batch()
+            snapshot?.documents.forEach { document in
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
+    }
+    
+    func deleteSolution(_ solution: Solution, completion: @escaping (Result<Void, Error>) -> Void) {
+        database.collection("history").document(solution.id).delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
         }
     }
 

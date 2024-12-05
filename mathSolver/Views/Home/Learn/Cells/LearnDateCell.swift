@@ -1,5 +1,5 @@
 //
-//  HomeDateCell.swift
+//  LearnDateCel.swift
 //  mathSolver
 //
 //  Created by FFK on 4.12.2024.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class HomeDateCell: UICollectionViewCell {
+final class LearnDateCell: UICollectionViewCell {
     static let identifier = Constants.Cells.HomeDateCell.identifier
 
     // MARK: - UI Components
