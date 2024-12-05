@@ -78,9 +78,17 @@ final class HistoryVC: UIViewController {
     }
     
     private func createMenu() -> UIMenu {
-        let deleteAllAction = UIAction(title: "Delete All", image: UIImage(systemName: "trash")) { _ in
+        let deleteAllAction = UIAction(title: "Delete All", image: UIImage(systemName: "trash")?.withTintColor(.red, renderingMode: .alwaysOriginal)) { _ in
             self.deleteAll()
+            
         }
+        
+        let attributedTitle = NSMutableAttributedString(
+            string: "Delete All",
+            attributes: [ .foregroundColor: UIColor.red]
+        )
+        
+        deleteAllAction.setValue(attributedTitle, forKey: "attributedTitle")
         
         let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { _ in
             self.deleteSection()
@@ -90,13 +98,36 @@ final class HistoryVC: UIViewController {
     }
     
     private func deleteAll() {
-        #warning("delete yapınca alert gözükmesin yerine emptyVC gözüksün")
         viewModel.deleteAllSolutions { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.collectionView.reloadData()
-                    self?.showAlert(title: "Success", message: "All history deleted successfully.")
+                    if self?.viewModel.getSortedKeys().isEmpty ?? true {
+                        self?.navigateToEmptyVC()
+                    }
+                case .failure(let error):
+                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func deleteItem(at indexPath: IndexPath) {
+        #warning("emptyVC ye geçiş sağlanmıyor kontrolünü sağla.")
+        #warning("ellipsis de delete tıklandığında ekranın herhangi bir yerine dokunulduğunda delete button hidden olsun tekrar")
+        let key = viewModel.getSortedKeys()[indexPath.section]
+        guard let solution = viewModel.getGroupedSolutions()[key]?[indexPath.item] else { return }
+        
+        viewModel.deleteSolution(solution) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.collectionView.deleteItems(at: [indexPath])
+                    if self?.viewModel.getSortedKeys().isEmpty ?? true {
+                        self?.navigateToEmptyVC()
+                    } else {
+                        self?.collectionView.reloadData()
+                    }
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription)
                 }
@@ -114,20 +145,9 @@ final class HistoryVC: UIViewController {
         collectionView.reloadData()
     }
     
-    private func deleteItem(at indexPath: IndexPath) {
-        let key = viewModel.getSortedKeys()[indexPath.section]
-        guard let solution = viewModel.getGroupedSolutions()[key]?[indexPath.item] else { return }
-        
-        viewModel.deleteSolution(solution) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.collectionView.deleteItems(at: [indexPath])
-                case .failure(let error):
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
-                }
-            }
-        }
+    private func navigateToEmptyVC() {
+        let emptyVC = EmptyVC()
+        navigationController?.setViewControllers([emptyVC], animated: false)
     }
     
     private func showAlert(title: String, message: String) {
