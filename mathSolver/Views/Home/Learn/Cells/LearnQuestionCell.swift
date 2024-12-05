@@ -1,5 +1,5 @@
 //
-//  HomeQuestionCell.swift
+//  LearnQuestionCel.swift
 //  mathSolver
 //
 //  Created by FFK on 4.12.2024.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class HomeQuestionCell: UICollectionViewCell {
+final class LearnQuestionCell: UICollectionViewCell {
     static let identifier = Constants.Cells.HomeQuestionCell.identifier
 
     // MARK: - UI Components

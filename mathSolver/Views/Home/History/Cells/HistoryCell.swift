@@ -28,7 +28,18 @@ final class HistoryCell: UICollectionViewCell {
         label.textAlignment = .center
         return label
     }()
-
+    
+    private lazy var deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = .red
+        button.isHidden = true
+        button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+        return button
+    }()
+    
+    private var deleteAction: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -41,6 +52,7 @@ final class HistoryCell: UICollectionViewCell {
     private func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(questionLabel)
+        contentView.addSubview(deleteButton)
 
         containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(8)
@@ -49,9 +61,21 @@ final class HistoryCell: UICollectionViewCell {
         questionLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
         }
+        
+        deleteButton.snp.makeConstraints { make in
+            make.top.equalTo(containerView.snp.top).offset(8)
+            make.trailing.equalTo(containerView.snp.trailing).offset(-8)
+            make.width.height.equalTo(24)
+        }
     }
-
-    func configure(with question: Solution) {
+    
+    func configure(with question: Solution, isDeleteMode: Bool, deleteAction: @escaping () -> Void) {
         questionLabel.text = question.question
+        self.deleteAction = deleteAction
+        deleteButton.isHidden = !isDeleteMode
+    }
+    
+    @objc private func handleDelete() {
+        deleteAction?()
     }
 }

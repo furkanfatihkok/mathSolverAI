@@ -1,5 +1,5 @@
 //
-//  HomeStepsCell.swift
+//  LearnSolutionCel.swift
 //
 //  Created by FFK on 2.12.2024.
 //
@@ -7,8 +7,8 @@
 import UIKit
 import SnapKit
 
-final class HomeStepsCell: UICollectionViewCell {
-    static let identifier = Constants.Cells.HomeStepsCell.identifier
+final class LearnSolutionCell: UICollectionViewCell {
+    static let identifier = Constants.Cells.HomeSolutionCell.identifier
 
     // MARK: - UI Components
     private lazy var containerView: UIView = {
@@ -24,18 +24,19 @@ final class HomeStepsCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = Constants.HomePage.SolutionVC.StepsTitle
+        label.text = Constants.HomePage.SolutionVC.SolutionTitle
         label.font = Constants.Fonts.poppinsBold(size: 16)
         label.textAlignment = .left
         return label
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.distribution = .fill
-        return stackView
+    private lazy var contentLabel: UILabel = {
+        let label = UILabel()
+        label.font = Constants.Fonts.poppinsRegular(size: 16)
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.lineBreakMode = .byWordWrapping
+        return label
     }()
 
     // MARK: - Initializers
@@ -52,7 +53,7 @@ final class HomeStepsCell: UICollectionViewCell {
     private func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(titleLabel)
-        containerView.addSubview(stackView)
+        containerView.addSubview(contentLabel)
         
         containerView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(8)
@@ -65,24 +66,14 @@ final class HomeStepsCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-16)
         }
         
-        stackView.snp.makeConstraints { make in
+        contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview().inset(16)
         }
     }
 
     // MARK: - Configure Cell
-    func configure(steps: [String]) {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        steps.forEach { step in
-            let stepLabel = UILabel()
-            stepLabel.text = step
-            stepLabel.font = Constants.Fonts.poppinsRegular(size: 16)
-            stepLabel.numberOfLines = 0
-            stepLabel.textAlignment = .left
-            stepLabel.lineBreakMode = .byWordWrapping
-            stackView.addArrangedSubview(stepLabel)
-        }
+    func configure(solution: String) {
+        contentLabel.text = solution
     }
 }

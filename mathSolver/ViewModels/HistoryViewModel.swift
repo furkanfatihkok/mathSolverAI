@@ -12,6 +12,7 @@ final class HistoryViewModel {
     private var sortedKeys: [String] = []
     
     func saveSolution(_ solution: Solution, completion: @escaping (Result<Void, Error>) -> Void) {
+        print("saveSolution called for solution: \(solution)") 
         HistoryManager.shared.saveSolution(solution) { result in
             switch result {
             case .success:
@@ -24,6 +25,34 @@ final class HistoryViewModel {
         }
     }
     
+    func deleteAllSolutions(completion: @escaping (Result<Void, Error>) -> Void) {
+        HistoryManager.shared.deleteAllSolutions { [weak self] result in
+            switch result {
+            case .success:
+                self?.groupedSolutions.removeAll()
+                self?.sortedKeys.removeAll()
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteSolution(_ solution: Solution, completion: @escaping (Result<Void, Error>) -> Void) {
+        HistoryManager.shared.deleteSolution(solution) { [weak self] result in
+            switch result {
+            case .success:
+                self?.groupedSolutions.forEach { (key, solutions) in
+                    self?.groupedSolutions[key] = solutions.filter { $0.id != solution.id }
+                }
+                self?.sortedKeys = self?.groupedSolutions.keys.sorted(by: { $0 > $1 }) ?? []
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+ 
     func fetchHistory(completion: @escaping (Result<Void, Error>) -> Void) {
         HistoryManager.shared.fetchHistory { [weak self] result in
             switch result {

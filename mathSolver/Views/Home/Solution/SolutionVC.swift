@@ -20,7 +20,7 @@ final class SolutionVC: UIViewController {
     // MARK: - UI Components
     private lazy var customNavBar: CustomNavigationBar = {
         let navBar = CustomNavigationBar()
-        navBar.configure(title: "Solution", backAction: #selector(backButtonTapped), target: self)
+        navBar.configure(title: "Solution", leftAction: #selector(backButtonTapped), rightAction: #selector(rightButtonTapped), target: self, leftImage: UIImage(systemName: "chevron.left"), rightImage: UIImage(systemName: ""))
         return navBar
     }()
     
@@ -97,11 +97,15 @@ final class SolutionVC: UIViewController {
     // MARK: - Actions
     @objc private func backButtonTapped() {
         if let solution = solutionModel {
-            let homeVC = HomeVC()
+            let homeVC = LearnVC()
             homeVC.setupSolutionData(solution: solution)
             
             navigationController?.setViewControllers([homeVC], animated: true)
         }
+    }
+    
+    @objc private func rightButtonTapped() {
+        
     }
 }
 

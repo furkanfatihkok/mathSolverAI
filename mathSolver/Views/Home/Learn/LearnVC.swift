@@ -1,5 +1,5 @@
 //
-//  HomeVC.swift
+//  LearnVC.swift
 //  mathSolver
 //
 //  Created by FFK on 29.11.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeVC: UIViewController {
+final class LearnVC: UIViewController {
     
     // MARK: - Properties
     private let homeVM = HomeViewModel()
@@ -51,10 +51,10 @@ final class HomeVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor(white: 0.97, alpha: 1)
-        collectionView.register(HomeDateCell.self, forCellWithReuseIdentifier: HomeDateCell.identifier)
-        collectionView.register(HomeQuestionCell.self, forCellWithReuseIdentifier: HomeQuestionCell.identifier)
-        collectionView.register(HomeSolutionCell.self, forCellWithReuseIdentifier: HomeSolutionCell.identifier)
-        collectionView.register(HomeStepsCell.self, forCellWithReuseIdentifier: HomeStepsCell.identifier)
+        collectionView.register(LearnDateCell.self, forCellWithReuseIdentifier: LearnDateCell.identifier)
+        collectionView.register(LearnQuestionCell.self, forCellWithReuseIdentifier: LearnQuestionCell.identifier)
+        collectionView.register(LearnSolutionCell.self, forCellWithReuseIdentifier: LearnSolutionCell.identifier)
+        collectionView.register(LearnStepsCell.self, forCellWithReuseIdentifier: LearnStepsCell.identifier)
         return collectionView
     }()
     
@@ -89,7 +89,6 @@ final class HomeVC: UIViewController {
     func setupSolutionData(solution: Solution) {
         self.solutionModel = solution
         collectionView.reloadData()
-        saveToHistory(solution)
     }
     
     // MARK: - Private Methods
@@ -159,17 +158,6 @@ final class HomeVC: UIViewController {
         }
     }
     
-    private func saveToHistory(_ solution: Solution) {
-        historyVM.saveSolution(solution) { result in
-            switch result {
-            case .success:
-                print("Solution saved to history.")
-            case .failure(let error):
-                print("Error saving to history: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     // MARK: - Actions
     @objc private func settingsButtonTapped() {
         let settingsVC = SettingsVC()
@@ -191,7 +179,7 @@ final class HomeVC: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension LearnVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         4
     }
@@ -203,19 +191,19 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeDateCell.identifier, for: indexPath) as! HomeDateCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LearnDateCell.identifier, for: indexPath) as! LearnDateCell
             cell.configureDate()
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeQuestionCell.identifier, for: indexPath) as! HomeQuestionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LearnQuestionCell.identifier, for: indexPath) as! LearnQuestionCell
             cell.configure(question: solutionModel?.question ?? "no data question")
             return cell
         case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSolutionCell.identifier, for: indexPath) as! HomeSolutionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LearnSolutionCell.identifier, for: indexPath) as! LearnSolutionCell
             cell.configure(solution: solutionModel?.solution ?? "no data solution")
             return cell
         case 3:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeStepsCell.identifier, for: indexPath) as! HomeStepsCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LearnStepsCell.identifier, for: indexPath) as! LearnStepsCell
             cell.configure(steps: solutionModel?.steps ?? ["no data question"])
             return cell
         default:
@@ -225,7 +213,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension LearnVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             activityIndicator.startAnimating()
