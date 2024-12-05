@@ -89,6 +89,7 @@ final class LearnVC: UIViewController {
     func setupSolutionData(solution: Solution) {
         self.solutionModel = solution
         collectionView.reloadData()
+        saveToHistory(solution)
     }
     
     // MARK: - Private Methods
@@ -154,6 +155,17 @@ final class LearnVC: UIViewController {
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
                 AlertManager.shared.showAlert(on: self!, title: "Error", message: error)
+            }
+        }
+    }
+    
+    private func saveToHistory(_ solution: Solution) {
+        historyVM.saveSolution(solution) { result in
+            switch result {
+            case .success:
+                print("Solution saved to history.")
+            case .failure(let error):
+                print("Error saving to history: \(error.localizedDescription)")
             }
         }
     }
