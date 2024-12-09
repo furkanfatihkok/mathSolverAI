@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SolutionVC: UIViewController {
+final class SolutionVC: BaseVC {
     
     // MARK: - Properties
     var onSolutionUpdated: ((Solution) -> Void)?
@@ -75,6 +75,7 @@ final class SolutionVC: UIViewController {
     private func bindViewModel() {
         homeVM.solvedResult = { [weak self] question, solution in
             DispatchQueue.main.async {
+                self?.hideLoadingAnimation()
                 let solutionModel = Solution(
                     question: question,
                     solution: solution,
@@ -89,6 +90,7 @@ final class SolutionVC: UIViewController {
         }
         homeVM.showError = { [weak self] error in
             DispatchQueue.main.async {
+                self?.hideLoadingAnimation()
                 AlertManager.shared.showAlert(on: self!, title: "Error", message: error)
             }
         }
@@ -99,7 +101,6 @@ final class SolutionVC: UIViewController {
         if let solution = solutionModel {
             let homeVC = LearnVC()
             homeVC.setupSolutionData(solution: solution)
-            
             navigationController?.setViewControllers([homeVC], animated: true)
         }
     }

@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import NeonSDK
 
-final class LearnVC: UIViewController {
+final class LearnVC: BaseVC {
     
     // MARK: - Properties
     private let homeVM = HomeViewModel()
@@ -67,12 +68,6 @@ final class LearnVC: UIViewController {
         )
     }()
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +95,6 @@ final class LearnVC: UIViewController {
         view.addSubview(historyButton)
         view.addSubview(collectionView)
         view.addSubview(circleButton)
-        view.addSubview(activityIndicator)
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -127,16 +121,12 @@ final class LearnVC: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
             make.width.height.equalTo(100)
         }
-        
-        activityIndicator.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
     }
     
     private func bindViewModel() {
         homeVM.solvedResult = { [weak self] question, solution in
             DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
+                self?.hideLoadingAnimation()
                 
                 let solutionModel = Solution(
                     question: question,
@@ -153,7 +143,7 @@ final class LearnVC: UIViewController {
         
         homeVM.showError = { [weak self] error in
             DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
+                self?.hideLoadingAnimation()
                 AlertManager.shared.showAlert(on: self!, title: "Error", message: error)
             }
         }
@@ -184,7 +174,7 @@ final class LearnVC: UIViewController {
     @objc private func circleButtonTapped() {
         CircleButtonManager.shared.presentActionSheet(on: self) { [weak self] selectedImage in
             guard let self = self, let image = selectedImage else { return }
-            self.activityIndicator.startAnimating()
+            self.showLoadingAnimation()
             self.homeVM.processImage(image: image)
         }
     }
@@ -228,7 +218,7 @@ extension LearnVC: UICollectionViewDelegate, UICollectionViewDataSource {
 extension LearnVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
-            activityIndicator.startAnimating()
+            showLoadingAnimation()
             homeVM.processImage(image: image)
         }
         picker.dismiss(animated: true, completion: nil)

@@ -6,11 +6,11 @@
 //
 
 import UIKit
-#warning("indicator ekle")
-final class EmptyVC: UIViewController {
+
+final class EmptyVC: BaseVC {
     
     // MARK: - Properties
-    private let viewModel = HomeViewModel()
+    private let homeVM = HomeViewModel()
     
     // MARK: - UI Components
     private lazy var titleLabel: UILabel = {
@@ -68,7 +68,7 @@ final class EmptyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupBindings()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,19 +122,6 @@ final class EmptyVC: UIViewController {
         }
     }
     
-    // MARK: - Actions
-    @objc private func circleButtonTapped() {
-        CircleButtonManager.shared.presentActionSheet(on: self) { [weak self] selectedImage in
-            guard let image = selectedImage else { return }
-            self?.viewModel.processImage(image: image)
-        }
-    }
-    
-    @objc private func settingsButtonTapped() {
-        let settingsVC = SettingsVC()
-        navigationController?.pushViewController(settingsVC, animated: true)
-    }
-    
     private func navigateToSolutionScreen(question: String, solution: String, steps: [String]) {
         let solutionModel = Solution(question: question, solution: solution, steps: steps)
         let solutionVC = SolutionVC()
@@ -142,28 +129,44 @@ final class EmptyVC: UIViewController {
         navigationController?.pushViewController(solutionVC, animated: true)
     }
     
-    private func setupBindings() {
-        viewModel.solvedResult = { [weak self] question, solution in
+    private func bindViewModel() {
+        homeVM.solvedResult = { [weak self] question, solution in
             DispatchQueue.main.async {
+                self?.hideLoadingAnimation()
                 let stepsFromAPI = ["Step 1: \(question)", "Step 2: Analyze solution", "Step 3: \(solution)"]
                 self?.navigateToSolutionScreen(question: question, solution: solution, steps: stepsFromAPI)
             }
         }
         
-        viewModel.showError = { [weak self] error in
+        homeVM.showError = { [weak self] error in
             DispatchQueue.main.async {
+                self?.hideLoadingAnimation()
                 AlertManager.shared.showAlert(on: self!, title: "Error", message: error)
             }
         }
     }
     
+    // MARK: - Actions
+    @objc private func circleButtonTapped() {
+        CircleButtonManager.shared.presentActionSheet(on: self) { [weak self] selectedImage in
+            guard let image = selectedImage else { return }
+            self?.showLoadingAnimation()
+            self?.homeVM.processImage(image: image)
+        }
+    }
+    
+    @objc private func settingsButtonTapped() {
+        let settingsVC = SettingsVC()
+        navigationController?.pushViewController(settingsVC, animated: true)
+    }
 }
 
 // MARK: - ImagePicker & NavigationController Delegate
 extension EmptyVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
-            viewModel.processImage(image: image)
+            showLoadingAnimation()
+            homeVM.processImage(image: image)
         }
         picker.dismiss(animated: true, completion: nil)
     }

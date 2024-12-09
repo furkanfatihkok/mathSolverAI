@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HistoryVC: UIViewController {
+final class HistoryVC: BaseVC {
     
     // MARK: - Properties
     private let viewModel = HistoryViewModel()
@@ -73,8 +73,10 @@ final class HistoryVC: UIViewController {
     }
     
     private func fetchHistory() {
+        showLoadingAnimation()
         viewModel.fetchHistory { [weak self] result in
             DispatchQueue.main.async {
+                self?.hideLoadingAnimation()
                 switch result {
                 case .success:
                     self?.collectionView.reloadData()
