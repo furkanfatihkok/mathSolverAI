@@ -32,6 +32,8 @@
 		027BA4D62CEDFBA500DABD30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027BA4D52CEDFBA500DABD30 /* SceneDelegate.swift */; };
 		027BA4DD2CEDFBA600DABD30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027BA4DC2CEDFBA600DABD30 /* Assets.xcassets */; };
 		027BA4E02CEDFBA600DABD30 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 027BA4DF2CEDFBA600DABD30 /* Base */; };
+		029E6D132D06F13F00C18C1F /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E6D122D06F13F00C18C1F /* BaseVC.swift */; };
+		029E6D1D2D07060800C18C1F /* infinity.json in Resources */ = {isa = PBXBuildFile; fileRef = 029E6D1C2D07060800C18C1F /* infinity.json */; };
 		02D5B9842CEE025900FECD96 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9832CEE025900FECD96 /* OnboardingVC.swift */; };
 		02D5B9862CEE026200FECD96 /* EmptyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9852CEE026200FECD96 /* EmptyVC.swift */; };
 		02D5B9882CEE026D00FECD96 /* PaywallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5B9872CEE026D00FECD96 /* PaywallVC.swift */; };
@@ -77,6 +79,8 @@
 		027BA4DC2CEDFBA600DABD30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		027BA4DF2CEDFBA600DABD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		027BA4E12CEDFBA600DABD30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		029E6D122D06F13F00C18C1F /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		029E6D1C2D07060800C18C1F /* infinity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = infinity.json; sourceTree = "<group>"; };
 		02D5B9832CEE025900FECD96 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		02D5B9852CEE026200FECD96 /* EmptyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyVC.swift; sourceTree = "<group>"; };
 		02D5B9872CEE026D00FECD96 /* PaywallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallVC.swift; sourceTree = "<group>"; };
@@ -200,9 +204,30 @@
 				02D5B9C42CF5F95A00FECD96 /* Enums */,
 				02D5B9902CEE06E400FECD96 /* Models */,
 				02D5B9912CEE06EB00FECD96 /* ViewModels */,
-				02D5B9922CEE06EE00FECD96 /* Views */,
+				02D5B9922CEE06EE00FECD96 /* Module */,
 			);
 			path = mathSolver;
+			sourceTree = "<group>";
+		};
+		029E6D112D06F13900C18C1F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				029E6D122D06F13F00C18C1F /* BaseVC.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		029E6D1E2D07154C00C18C1F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				029E6D112D06F13900C18C1F /* Base */,
+				02D5B9CD2CF61C6800FECD96 /* Welcome */,
+				02D5B9C82CF5FC9B00FECD96 /* Onboarding */,
+				02D5B9C92CF5FCAA00FECD96 /* Paywall */,
+				02D5B9CA2CF5FCB300FECD96 /* Home */,
+				02D5B9D62CF72EB700FECD96 /* Settings */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		02D5B98E2CEE054300FECD96 /* Application */ = {
@@ -222,6 +247,7 @@
 			children = (
 				02D5B9972CEE1A8500FECD96 /* Font */,
 				027BA4DC2CEDFBA600DABD30 /* Assets.xcassets */,
+				029E6D1C2D07060800C18C1F /* infinity.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -243,16 +269,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		02D5B9922CEE06EE00FECD96 /* Views */ = {
+		02D5B9922CEE06EE00FECD96 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				02D5B9CD2CF61C6800FECD96 /* Welcome */,
-				02D5B9C82CF5FC9B00FECD96 /* Onboarding */,
-				02D5B9C92CF5FCAA00FECD96 /* Paywall */,
-				02D5B9CA2CF5FCB300FECD96 /* Home */,
-				02D5B9D62CF72EB700FECD96 /* Settings */,
+				029E6D1E2D07154C00C18C1F /* Views */,
 			);
-			path = Views;
+			path = Module;
 			sourceTree = "<group>";
 		};
 		02D5B9972CEE1A8500FECD96 /* Font */ = {
@@ -439,6 +461,7 @@
 				02D5B9B82CEE1A9000FECD96 /* Poppins-Regular.ttf in Resources */,
 				02D5B9AD2CEE1A9000FECD96 /* Poppins-Bold.ttf in Resources */,
 				0262C6982CFF1DA500525F3D /* GoogleService-Info.plist in Resources */,
+				029E6D1D2D07060800C18C1F /* infinity.json in Resources */,
 				027BA4DD2CEDFBA600DABD30 /* Assets.xcassets in Resources */,
 				027BA4E02CEDFBA600DABD30 /* Base in Resources */,
 			);
@@ -481,6 +504,7 @@
 				02D5B9842CEE025900FECD96 /* OnboardingVC.swift in Sources */,
 				0262C6A72D004B0900525F3D /* CustomNavigationBar.swift in Sources */,
 				02D5B9C12CEE1E6F00FECD96 /* UIButton.swift in Sources */,
+				029E6D132D06F13F00C18C1F /* BaseVC.swift in Sources */,
 				0262C6912CFF14D500525F3D /* HistoryVC.swift in Sources */,
 				02D5B9CC2CF5FCE500FECD96 /* OnboardingCell.swift in Sources */,
 				027BA4D42CEDFBA500DABD30 /* AppDelegate.swift in Sources */,
