@@ -10,9 +10,10 @@ import UIKit
 final class HistoryVC: UIViewController {
     
     // MARK: - Properties
-    private var historyData: [String: [[String: Any]]] = [:]
     private let viewModel = HistoryViewModel()
+    private var historyData: [String: [[String: Any]]] = [:]
     private var isDeleteMode: Bool = false
+    private var isMenuVisible: Bool = false
     
     // MARK: - UI Components
     private lazy var customNavBar: CustomNavigationBar = {
@@ -39,6 +40,12 @@ final class HistoryVC: UIViewController {
         return collectionView
     }()
     
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapOutside(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +58,7 @@ final class HistoryVC: UIViewController {
         view.backgroundColor = Constants.Colors.backgroundColor
         view.addSubview(customNavBar)
         view.addSubview(collectionView)
+        view.addGestureRecognizer(tapGesture)
         
         customNavBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -113,8 +121,7 @@ final class HistoryVC: UIViewController {
     }
     
     private func deleteItem(at indexPath: IndexPath) {
-        #warning("emptyVC ye geçiş sağlanmıyor kontrolünü sağla.")
-        #warning("ellipsis de delete tıklandığında ekranın herhangi bir yerine dokunulduğunda delete button hidden olsun tekrar")
+#warning("emptyVC ye geçiş sağlanmıyor kontrolünü sağla.")
         let key = viewModel.getSortedKeys()[indexPath.section]
         guard let solution = viewModel.getGroupedSolutions()[key]?[indexPath.item] else { return }
         
@@ -136,7 +143,7 @@ final class HistoryVC: UIViewController {
     }
     
     private func deleteSection() {
-        isDeleteMode = true
+        isDeleteMode = !isDeleteMode
         collectionView.reloadData()
     }
     
@@ -162,13 +169,37 @@ final class HistoryVC: UIViewController {
     }
     
     @objc private func rightButtonTapped() {
-        customNavBar.rightButton.menu = createMenu()
+        isMenuVisible.toggle()
+        customNavBar.rightButton.menu = isMenuVisible ? createMenu() : nil
+        
+        if !isMenuVisible {
+            isDeleteMode = false
+            collectionView.reloadData()
+        }
+    }
+    
+    @objc private func handleTapOutside(_ sender: UITapGestureRecognizer) {
+        if isMenuVisible {
+            customNavBar.rightButton.menu = nil
+            isMenuVisible = false
+        }
+        
+        let locationInView = sender.location(in: view)
+        let locationInCollectionView = sender.location(in: collectionView)
+        
+        if collectionView.indexPathForItem(at: locationInCollectionView) == nil {
+            if isDeleteMode {
+                isDeleteMode = false
+                collectionView.reloadData()
+            }
+        }
     }
 }
 
 // MARK: - UICollectionViewDelegate
 extension HistoryVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let key = viewModel.getSortedKeys()[indexPath.section]
         let solution = viewModel.getGroupedSolutions()[key]?[indexPath.item]
         
@@ -178,7 +209,6 @@ extension HistoryVC: UICollectionViewDelegate {
         }
         navigationController?.pushViewController(learnVC, animated: true)
     }
-    
 }
 
 // MARK: - UICollectionViewDataSource

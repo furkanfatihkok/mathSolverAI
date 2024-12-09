@@ -11,6 +11,8 @@ import SnapKit
 final class HistoryCell: UICollectionViewCell {
     static let identifier = Constants.Cells.HistoryCell.identifier
     
+    private var deleteAction: (() -> Void)?
+    
     private lazy var containerView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "background")
@@ -37,8 +39,6 @@ final class HistoryCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
         return button
     }()
-    
-    private var deleteAction: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
