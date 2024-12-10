@@ -164,9 +164,12 @@ final class EmptyVC: BaseVC {
 // MARK: - ImagePicker & NavigationController Delegate
 extension EmptyVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.originalImage] as? UIImage {
+        if let editedImage = info[.editedImage] as? UIImage {
             showLoadingAnimation()
-            homeVM.processImage(image: image)
+            homeVM.processImage(image: editedImage)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            showLoadingAnimation()
+            homeVM.processImage(image: originalImage)
         }
         picker.dismiss(animated: true, completion: nil)
     }
