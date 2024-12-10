@@ -35,6 +35,7 @@ final class CircleButtonManager {
         }
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = true
         imagePicker.delegate = viewController as? (UIImagePickerControllerDelegate & UINavigationControllerDelegate)
         imagePicker.allowsEditing = false
         viewController.present(imagePicker, animated: true, completion: nil)
@@ -48,6 +49,7 @@ final class CircleButtonManager {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = viewController as? (UIImagePickerControllerDelegate & UINavigationControllerDelegate)
+        imagePicker.allowsEditing = true
         viewController.present(imagePicker, animated: true, completion: nil)
     }
 }
